@@ -1,0 +1,41 @@
+automacro definirVariaveis_sabio {
+	timeout 300
+	priority -99 #prioridade alta, mas nao tao alta quanto a macro definir variávels correta
+	JobID 2,16 #mago, sabio
+	exclusive 1
+	call {
+		$statsPadrao = #TODO
+		$skillsClasse1 = #TODO
+		$skillsClasse2 = #TODO 
+
+		#se não existir o bloco, criar
+		if (&config(attackSkillSlot_3_sp) =~ /\d+/) {
+			log o bloco de attackSkillSlot ja existe
+		} else {
+			criarBlocoAttackSkillSlot('3') #lança de gelo, fogo e relampago
+		}
+		
+		if (&config(useSelf_skill_1_sp) =~ /\d+/) {
+			log o bloco de useSelSkill ja existe
+		} elsee {
+			criarBlocouseSelf_skill('1') #proteção arcana
+		}
+		
+		do conf attackSkillSlot_1 Lanças de Fogo #Monstros de Terra/Sem dano elemental
+		do conf attackSkillSlot_1_monsters Jiboía, Rabo de Verme, Caramelo, Pé Grande, Creamy, Percevejo, Poporing, Besouro-Chifre, Yoyo, Grove, Flora, Argiope, Argos, Porcellio, Metaling
+		do conf attackSkillSlot_1_sp > 50
+		do conf attackSkillSlot_1_WhenStatusInactive EFST_POSTDELAY
+		
+		do conf attackSkillSlot_2 Lanças de Gelo #Monstros de Fogo
+		do conf attackSkillSlot_2_monsters Salgueiro Ancião 
+		do conf attackSkillSlot_2_sp > 50
+		do conf attackSkillSlot_2_WhenStatusInactive EFST_POSTDELAY
+		
+		do conf attackSkillSlot_3 Relampago #Monstros de Agua
+		do conf attackSkillSlot_3_monsters Esporo 
+		do conf attackSkillSlot_3_sp > 50
+		do conf attackSkillSlot_3_WhenStatusInactive EFST_POSTDELAY
+		
+		#mapas de up serão decididos no arquivo de upAte99.pm
+	}
+}
