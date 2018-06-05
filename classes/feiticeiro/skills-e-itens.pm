@@ -19,7 +19,7 @@ automacro configurarLancasDeGelo {
         
         do conf enhancedCasting_0 MG_COLDBOLT
         do conf enhancedCasting_0_sp >= 20
-        do conf enhancedCasting_0_dist 8
+        do conf enhancedCasting_0_dist 9
         do conf enhancedCasting_0_whenStatusInactive EFST_POSTDELAY
         do conf enhancedCasting_0_monsters
         do conf enhancedCasting_0_disabled 0
@@ -50,7 +50,7 @@ automacro configurarLancasDeFogo {
         
         do conf enhancedCasting_1 MG_FIREBOLT
         do conf enhancedCasting_1_sp >= 20
-        do conf enhancedCasting_1_dist 8
+        do conf enhancedCasting_1_dist 9
         do conf enhancedCasting_1_whenStatusInactive EFST_POSTDELAY
         do conf enhancedCasting_1_monsters
         do conf enhancedCasting_1_disabled 0
@@ -80,7 +80,7 @@ automacro configurarRelampago {
         
         do conf enhancedCasting_2 MG_LIGHTNINGBOLT
         do conf enhancedCasting_2_sp >= 25
-        do conf enhancedCasting_2_dist 8
+        do conf enhancedCasting_2_dist 9
         do conf enhancedCasting_2_whenStatusInactive EFST_POSTDELAY
         do conf enhancedCasting_2_disabled 0
         do conf enhancedCasting_2_Element Water
@@ -110,12 +110,12 @@ automacro configurarAtaqueEspiritual {
         
         do conf enhancedCasting_3 MG_NAPALMBEAT
         do conf enhancedCasting_3_sp >= 25
-        do conf enhancedCasting_3_dist 8
+        do conf enhancedCasting_3_dist 9
         do conf enhancedCasting_3_whenStatusInactive EFST_POSTDELAY
         do conf enhancedCasting_3_disabled 0
         do conf enhancedCasting_3_Element Shadow, Undead
-        do conf enhancedCasting_3_damageFormula mATK * ((sLVL / 10) + 0,6)
-+       do conf enhancedCasting_3_damageType Holy
+        do conf enhancedCasting_3_damageFormula mATK * ((sLVL / 10) + 0.6)
+        do conf enhancedCasting_3_damageType Holy
     }
 }
 
