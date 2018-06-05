@@ -1,4 +1,4 @@
-sub configurarBuild {
+﻿sub configurarBuild {
     my %configsBuild = (
         skillsAprendiz => 'NV_BASIC 9',
         skillsClasse1 => 'AC_OWL 10, AC_VULTURE 10, AC_CONCENTRATION 10, AC_DOUBLE 10, AC_SHOWER 9',

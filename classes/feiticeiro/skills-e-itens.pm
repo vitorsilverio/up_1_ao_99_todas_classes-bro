@@ -24,7 +24,7 @@ automacro configurarLancasDeGelo {
         do conf enhancedCasting_0_monsters
         do conf enhancedCasting_0_disabled 0
         do conf enhancedCasting_0_Element Fire
-        do conf enhancedCasting_0_damageFormula mATK * (100 * sLVL)
+        do conf enhancedCasting_0_damageFormula mATK * (0.9 * sLVL)
         do conf enhancedCasting_0_damageType Water
     }
 }
@@ -55,7 +55,7 @@ automacro configurarLancasDeFogo {
         do conf enhancedCasting_1_monsters
         do conf enhancedCasting_1_disabled 0
         do conf enhancedCasting_1_Element Earth
-        do conf enhancedCasting_1_damageFormula mATK * (100 * sLVL)
+        do conf enhancedCasting_1_damageFormula mATK * (0.9 * sLVL)
         do conf enhancedCasting_1_damageType Fire
     }
 }
@@ -68,7 +68,7 @@ automacro configurarRelampago {
     call {
         [
         log ===========================================
-        log =Já tenho a skill Relâmpago,
+        log =Já tenho a skill Ataque Espiritual,
         log =Configurando pra usar ela
         log ===========================================
         ]
@@ -84,7 +84,7 @@ automacro configurarRelampago {
         do conf enhancedCasting_2_whenStatusInactive EFST_POSTDELAY
         do conf enhancedCasting_2_disabled 0
         do conf enhancedCasting_2_Element Water
-        do conf enhancedCasting_2_damageFormula mATK * (100 * sLVL)
+        do conf enhancedCasting_2_damageFormula mATK * (0.9 * sLVL)
         do conf enhancedCasting_2_damageType Wind        
     }
 }
@@ -114,6 +114,8 @@ automacro configurarAtaqueEspiritual {
         do conf enhancedCasting_3_whenStatusInactive EFST_POSTDELAY
         do conf enhancedCasting_3_disabled 0
         do conf enhancedCasting_3_Element Shadow, Undead
+        do conf enhancedCasting_3_damageFormula mATK * ((sLVL / 10) + 0,6)
++       do conf enhancedCasting_3_damageType Holy
     }
 }
 
@@ -125,7 +127,7 @@ automacro configurarEspiritosAncioes {
     call {
         [
         log ===========================================
-        log =Já tenho a skill Espíritos Anciões,
+        log =Já tenho a skill Relâmpago,
         log =Configurando pra usar ela
         log ===========================================
         ]
@@ -146,7 +148,7 @@ automacro configurarEspiritosAncioes {
         do conf enhancedCasting_3_monsters
         do conf enhancedCasting_3_disabled 0
         do conf enhancedCasting_3_Element Shadow, Undead
-        do conf enhancedCasting_3_damageFormula mATK * (5 * sLVL)
+        do conf enhancedCasting_3_damageFormula mATK * (1 + 0.05 * sLVL)
         do conf enhancedCasting_3_damageType Holy
     }
 }
