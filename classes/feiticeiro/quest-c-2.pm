@@ -627,6 +627,7 @@ automacro questCacador_coletarItens_possibilidade7 {
 
 
 #Itens necessários pra poder continuar na quest pra Sábio!#
+#Pra fazer a terceira parte dos testes!#
 automacro questSabio_coletarItens_possibilidade1 {
     QuestActive 2047
     QuestActive 2048
