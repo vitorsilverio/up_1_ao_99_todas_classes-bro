@@ -12,53 +12,53 @@ if (! $job) {
     $btn = New-Object system.windows.Forms.Button
     $imageListIcons = New-Object System.Windows.Forms.ImageList
     $labelEscolherClasse = New-Object System.Windows.Forms.Label
-    $labelConfigsPersonalizadas = New-Object System.Windows.Forms.Label
-    $configsPersonalizadas = New-Object System.Windows.Forms.PropertyGrid
+    #$labelConfigsPersonalizadas = New-Object System.Windows.Forms.Label
+    #$configsPersonalizadas = New-Object System.Windows.Forms.PropertyGrid
     $labelClasseSelecionada = New-Object System.Windows.Forms.Label
     $painelSuperior = New-Object System.Windows.Forms.Panel
     $painelMedio = New-Object System.Windows.Forms.Panel
     $painelInferior = New-Object System.Windows.Forms.Panel
     
-    if($PSVersionTable.PSVersion.Major -ge 3){
-        $classDefinition = '
-            using System;
-            public class Configuracoes {
-                public String skillsAprendiz { get; set; }
-                public String skillsClasse1 { get; set; }
-                public String skillsClasse2 { get; set; }
-                public String skillsClasse1T { get; set; }
-                public String skillsClasse2T { get; set; }
-                public String skillsClasse3 { get; set; }
-                public String statsPadrao { get; set; }
-                public String statsPadraoTransclasse { get; set; }
-                public String statsPadraoClasse3 { get; set; }
-                public String renascer { get; set; }
-                public String amigo { get; set; }
-                public String pontoDeEncontro { get; set; }
-
-            }
-        '
-        Add-Type -Language CSharp  -TypeDefinition $classDefinition
-        
-        $configuracoes = New-Object Configuracoes
-    } else {
-        [System.Windows.Forms.MessageBox]::Show( "O powershell do seu sistema operacional é muito antigo. As configurações personalizadas serão apenas leitura para visualização", "Aviso" )
-        $configuracoes = New-Object -TypeName PSObject -Prop @{ 
-            skillsAprendiz = $null;
-            skillsClasse1 = $null; 
-            skillsClasse2 = $null;
-            skillsClasse1T = $null;
-            skillsClasse2T = $null;
-            skillsClasse3 = $null;
-            statsPadrao = $null;
-            statsPadraoTransclasse = $null;
-            statsPadraoClasse3 = $null;
-            renascer = $null;
-            amigo = $null;
-            pontoDeEncontro = $null;
-
-        }
-    }
+    #if($PSVersionTable.PSVersion.Major -ge 3){
+    #    $classDefinition = '
+    #        using System;
+    #        public class Configuracoes {
+    #            public String skillsAprendiz { get; set; }
+    #            public String skillsClasse1 { get; set; }
+    #            public String skillsClasse2 { get; set; }
+    #            public String skillsClasse1T { get; set; }
+    #            public String skillsClasse2T { get; set; }
+    #            public String skillsClasse3 { get; set; }
+    #            public String statsPadrao { get; set; }
+    #            public String statsPadraoTransclasse { get; set; }
+    #            public String statsPadraoClasse3 { get; set; }
+    #            public String renascer { get; set; }
+    #            public String amigo { get; set; }
+    #            public String pontoDeEncontro { get; set; }
+    #    
+    #        }
+    #    '
+    #    Add-Type -Language CSharp  -TypeDefinition $classDefinition
+    #    
+    #    $configuracoes = New-Object Configuracoes
+    #} else {
+    #    [System.Windows.Forms.MessageBox]::Show( "O powershell do seu sistema operacional é muito antigo. As configurações personalizadas serão apenas leitura para visualização", "Aviso" )
+    #    $configuracoes = New-Object -TypeName PSObject -Prop @{ 
+    #        skillsAprendiz = $null;
+    #        skillsClasse1 = $null; 
+    #        skillsClasse2 = $null;
+    #        skillsClasse1T = $null;
+    #        skillsClasse2T = $null;
+    #        skillsClasse3 = $null;
+    #        statsPadrao = $null;
+    #        statsPadraoTransclasse = $null;
+    #        statsPadraoClasse3 = $null;
+    #        renascer = $null;
+    #        amigo = $null;
+    #        pontoDeEncontro = $null;
+    #
+    #    }
+    #}
 
 }
 
@@ -98,30 +98,30 @@ function gerarMacro {
     Get-Content -Encoding UTF8 comum\*.pm | Out-File $eventMacros -Encoding UTF8 -append
 }
 
-function salvarBuild {
-    param ($classe)
-    $arquivo = "classes/$classe/config.pm"
-    $config = $configsPersonalizadas.SelectedObject
-    $tempFile = "classes/$classe/config.pm.tmp"
-    foreach($line in Get-Content -Encoding UTF8 $arquivo) {
-        if($line -match "^\s+\w+\s+=>\s+'.*"){
-            $chave = $line -replace "\s+(\w+)\s+\=\>.*",'$1'
-            $novoValor = $config."$chave"
-            $line -replace "'.*'","'$novoValor'" | Out-File $tempFile -Encoding UTF8 -append
-        } else {
-            $line | Out-File $tempFile -Encoding UTF8 -append
-        }
-    }
-    Remove-Item $arquivo
-    Rename-Item -Path $tempFile -NewName "config.pm"
-
-}
+#function salvarBuild {
+#    param ($classe)
+#    $arquivo = "classes/$classe/config.pm"
+#    $config = $configsPersonalizadas.SelectedObject
+#    $tempFile = "classes/$classe/config.pm.tmp"
+#    foreach($line in Get-Content -Encoding UTF8 $arquivo) {
+#        if($line -match "^\s+\w+\s+=>\s+'.*"){
+#            $chave = $line -replace "\s+(\w+)\s+\=\>.*",'$1'
+#            $novoValor = $config."$chave"
+#            $line -replace "'.*'","'$novoValor'" | Out-File $tempFile -Encoding UTF8 -append
+#        } else {
+#           $line | Out-File $tempFile -Encoding UTF8 -append
+#        }
+#    }
+#    Remove-Item $arquivo
+#    Rename-Item -Path $tempFile -NewName "config.pm"
+#
+#}
 
 function acaoBotaoGerar {
     $classe = $listJobs.SelectedItems
     if ($classe.Count -eq 1) {
         $classeSelecionada = $classe[0].Text
-        salvarBuild($classeSelecionada)
+        #salvarBuild($classeSelecionada)
         gerarMacro($classeSelecionada)
         [System.Windows.Forms.MessageBox]::Show("eventMacros.txt para $classeSelecionada gerado com sucesso!" , "Ok")
         $Form.Dispose()
@@ -130,35 +130,35 @@ function acaoBotaoGerar {
     }
 }
 
-function acaoCarregarConfiguracoes {
-    $classe = $listJobs.SelectedItems
-    if ($classe.Count -eq 1) {
-        $classeSelecionada = $classe[0].Text
-        Write-Host "Classe selecionada: $classeSelecionada"
-
-        $labelClasseSelecionada.Text = "Classe selecionada: $classeSelecionada"
-        $c = limparNomeDaClasse($classe[0].Text)
-        $arquivo = "classes/$c/config.pm"
-        Write-Host "Abrindo arquivo: $arquivo"
-        foreach($line in Get-Content -Encoding UTF8 $arquivo) {
-
-            if($line -match "^\s+\w+\s+=>\s+'.*"){
-                Write-Host "Linha de configuração: $line"
-                $chave = $line -replace "\s+(\w+)\s+\=\>.*",'$1'
-                $valor = $line -replace ".*'(.*)'.*",'$1'
-                
-                $configuracoes."$chave" = $valor
-                                
-            }
-           
-        }
-        $configsPersonalizadas.SelectedObject = $configuracoes
-
-    } else {
-        $labelClasseSelecionada.Text = "Classe selecionada: "
-        
-    }
-}
+#function acaoCarregarConfiguracoes {
+#    $classe = $listJobs.SelectedItems
+#    if ($classe.Count -eq 1) {
+#        $classeSelecionada = $classe[0].Text
+#        Write-Host "Classe selecionada: $classeSelecionada"
+#
+#        $labelClasseSelecionada.Text = "Classe selecionada: $classeSelecionada"
+#        $c = limparNomeDaClasse($classe[0].Text)
+#        $arquivo = "classes/$c/config.pm"
+#        Write-Host "Abrindo arquivo: $arquivo"
+#        foreach($line in Get-Content -Encoding UTF8 $arquivo) {
+#
+#            if($line -match "^\s+\w+\s+=>\s+'.*"){
+#                Write-Host "Linha de configuração: $line"
+#                $chave = $line -replace "\s+(\w+)\s+\=\>.*",'$1'
+#                $valor = $line -replace ".*'(.*)'.*",'$1'
+#                
+#                $configuracoes."$chave" = $valor
+#                                
+#            }
+#           
+#        }
+#        $configsPersonalizadas.SelectedObject = $configuracoes
+#
+#    } else {
+#        $labelClasseSelecionada.Text = "Classe selecionada: "
+#        
+#    }
+#}
 
 
 function desenharJanela {
@@ -171,11 +171,11 @@ function desenharJanela {
     $Form.Controls.Add($painelMedio)
     $painelMedio.Dock = [System.Windows.Forms.DockStyle]::Fill
          
-    $painelMedio.Controls.Add($configsPersonalizadas)
-    $configsPersonalizadas.Dock = [System.Windows.Forms.DockStyle]::Fill
-    $configsPersonalizadas.SelectedObject = $configuracoes
-    $configsPersonalizadas.PropertySort = [System.Windows.Forms.PropertySort]::NoSort
-    $configsPersonalizadas.ToolbarVisible = $false
+    #$painelMedio.Controls.Add($configsPersonalizadas)
+    #$configsPersonalizadas.Dock = [System.Windows.Forms.DockStyle]::Fill
+    #$configsPersonalizadas.SelectedObject = $configuracoes
+    #$configsPersonalizadas.PropertySort = [System.Windows.Forms.PropertySort]::NoSort
+    #$configsPersonalizadas.ToolbarVisible = $false
 
     $Form.Controls.Add($painelSuperior)
     $painelSuperior.Dock = [System.Windows.Forms.DockStyle]::Top
@@ -187,7 +187,7 @@ function desenharJanela {
     $listJobs.View = "LargeIcon"
     $listJobs.LargeImageList = $imageListIcons
     $listJobs.MultiSelect = $false
-    $listJobs.Add_click({ acaoCarregarConfiguracoes })
+    #$listJobs.Add_click({ acaoCarregarConfiguracoes })
     $listJobs.AutoSize = $true
     
 
@@ -196,9 +196,9 @@ function desenharJanela {
     $labelEscolherClasse.Text = "Selecione sua classe:"
 
    
-    $painelSuperior.Controls.Add($labelConfigsPersonalizadas);
-    $labelConfigsPersonalizadas.Dock = [System.Windows.Forms.DockStyle]::Bottom
-    $labelConfigsPersonalizadas.Text = "Configurações Personalizadas"
+    #$painelSuperior.Controls.Add($labelConfigsPersonalizadas);
+    #$labelConfigsPersonalizadas.Dock = [System.Windows.Forms.DockStyle]::Bottom
+    #$labelConfigsPersonalizadas.Text = "Configurações Personalizadas"
 
      
 
