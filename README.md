@@ -31,7 +31,7 @@ O repositório já disponibiliza o eventMacros.txt de todas as classes montados 
 ## Instruções de Instalação
 1. Clique no link de download [(Ou aqui, dá no mesmo)](https://github.com/eventMacrosBR/up_1_ao_99_todas_classes-bro/releases)
 2. Lá terá uma lista com um link para a eventMacro de cada classe. Escolha a classe desejada e clique nela.
-3. Após baixar, descompacte-o. Mova o arquivo **eventMacros.txt** para dentro da pasta control de seu bot.
+3. Após baixar, descompacte-o. Mova os arquivos **eventMacros.txt, build.json, mapas.json, mapasTrans.json e renascer.json** para dentro da pasta control de seu bot.
 4. Se a macro solicitar algum plugin você pode encontrá-los em [PluginParaUpTodasAsClasse](https://github.com/eventMacrosBR/PluginsParaUpTodasAsClasses/releases) basta colocá-los na pasta plugins que a macro instala e configura
 5. Seja Feliz :D
 
@@ -40,8 +40,8 @@ Obs: Colocamos o nome da classe mais alta para definir a linha de evolução a s
 ## Configurações Personalizadas
 
 - Caso esteja utilizando o windows 8 ou superior você pode configurar sua build e parametros para quest de renascer utilizando o `gerador-eventmacros-windows.bat`.
-- Quest de Renascimento: por padrão a quest de renascimento vem desativada, você pode ativá-la no arquivo `classes/<classe-3>/config.pm`. Obs: É necessário informar o nome de um personagem para que o bot consiga passar os zennys extras para conseguir renascer.
-- Customizando skills e itens utilizaveis: Você pode modificar os itens e skills que seu bot vai utilizar para caçar criando blocos de automacro em `classes/<classe-3>/skills-e-itens.pm`
+- Quest de Renascimento: por padrão a quest de renascimento vem desativada, você pode ativá-la no arquivo `comum/renascer.json`. Obs: É necessário informar o nome de um personagem para que o bot consiga passar os zennys extras para conseguir renascer.
+- Customizando skills e itens utilizaveis: Você pode modificar os itens e skills que seu bot vai utilizar para caçar criando blocos de automacro em `classes/<classe-3>/builds/personalizado.json`
 
 ## Mantendo modificações de builds entre updates
 
