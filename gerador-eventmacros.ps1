@@ -84,7 +84,12 @@ function limparNomeDaClasse {
 
 function gerarMacro {
     param ($classe)
-    $eventMacros =  "eventMacros.txt"
+    $template = "padrao"
+    $eventMacros =  "macro/eventMacros.txt"
+    $build = "macro/build.json"
+    $mapas = "macro/mapas.json"
+    $mapasTrans = "macro/mapasTrans.json"
+    $renascer = "macro/renascer.json"
     #Remover o arquivo antigo
     if (Test-Path $eventMacros) {
       Remove-Item $eventMacros
@@ -96,6 +101,10 @@ function gerarMacro {
     $automacroVersao | Out-File $eventMacros -Encoding UTF8 -append 
     Get-Content -Encoding UTF8 classes\$jobSimples\*.pm | Out-File $eventMacros -Encoding UTF8 -append
     Get-Content -Encoding UTF8 comum\*.pm | Out-File $eventMacros -Encoding UTF8 -append
+    Get-Content -Encoding UTF8 classes\$jobSimples\builds\$template.json | Out-File $build -Encoding UTF8
+    Get-Content -Encoding UTF8 classes\$jobSimples\mapas\$template.json | Out-File $mapas -Encoding UTF8
+    Get-Content -Encoding UTF8 classes\$jobSimples\mapas\$($template)Trans.json | Out-File $mapasTrans -Encoding UTF8
+    Get-Content -Encoding UTF8 comum\renascer.json | Out-File $renascer -Encoding UTF8
 }
 
 #function salvarBuild {

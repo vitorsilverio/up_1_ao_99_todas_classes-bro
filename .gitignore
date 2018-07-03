@@ -1,10 +1,15 @@
 #EventMacos criado na pasta
 eventMacros.txt
+macro/*.json
+macro/eventMacros.txt
+
 #VSCODE CTags
 .vstags
+
 #distribution folder
 dist/
-#bat que eu uso pra dar git fetch e pull mais r�pido
+
+#bat que eu uso pra dar git fetch e pull mais rápido
 atualizarRepositorio.bat
 
 

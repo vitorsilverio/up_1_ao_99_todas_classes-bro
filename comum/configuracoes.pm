@@ -46,8 +46,9 @@ sub inicializarParametrosQuestClasseRenascer {
 
 sub lerArquivo {
     my $arquivo = @_;
+    my $path = Settings::getControlFolders()[0];
     my $conteudo;
-    open(my $arquivoStream, '<', $arquivo) or die "Erro ao ler arquivo $arquivo";
+    open(my $arquivoStream, '<', "$path/$arquivo") or die "Erro ao ler arquivo $arquivo";
     {
         local $/;
         $conteudo = <$arquivoStream>;
