@@ -31,8 +31,8 @@ automacro questRenascer_chegueilvl99 {
             [
             do conf dealAuto 3
             do conf dealAuto_names $parametrosQuestClasseRenascer{amigo}
-            do iconf Camisa de Algodão 0 1 0
-            do iconf "Faca [3]" 0 1 0
+            do iconf 2301 0 1 0 # Camisa de Algodão
+            do iconf 1201 0 1 0 # Faca [3]
 
             # é uma forma que eu pensei de desabilitar TODOS os getAuto
             # independente de quantos hajam
@@ -99,7 +99,7 @@ automacro questRenascer_salvarNaCidadeQueVouUparEDefinirVariavel {
         #evita problemas de o char lvl 1 morrer e voltar pra juno
         #sem dinheiro pra ir pro mapa certo
         #pega o mapa do lvl 1
-        extrairMapasDeUp(1, "sim") # o "sim" representa que queremos os mapa de up de transclasse
+        %mapa = extrairMapasDeUp(1, "sim") # o "sim" representa que queremos os mapa de up de transclasse
         $mapaQueVouUparNolvl1 = $mapa{saveMap}
         if (&config(saveMap) != $mapaQueVouUparNolvl1) {
             call salvarNaCidade "$mapaQueVouUparNolvl1"
@@ -273,6 +273,12 @@ automacro questRenascer_tudoCertoVamosRebornar {
     QuestInactive 1000
     call {
         do conf -f o_que_estou_fazendo indoRebornar!!!
+        [
+        do ai auto
+        do conf lockMap 0
+        call pararDeAtacar
+        do conf sitAuto_idle 0
+        ]
         # se tiver tudo certinho pra começar o reborn ,essa automacro ativa
         do conf -f questRenascer_estagio 1
     }
@@ -280,21 +286,15 @@ automacro questRenascer_tudoCertoVamosRebornar {
 
 automacro questRenascer__primeiroEstagio {
     ConfigKey questRenascer_estagio 1
-    InMap yuno
+    InMap yuno, yuno_in02
     exclusive 1
     QuestInactive 1000
     call {
-        [
-        do ai auto
-        do conf lockMap 0
-        do conf attackAuto 0
-        do conf route_randomWalk 0
-        do conf sitAuto_idle 0
-        ]
         do move yuno_in02
         if ($.map = yuno_in02) do conf questRenascer_estagio 2
     }
 }
+
 automacro questRenascer_primeiroEstagio_bugada {
     ConfigKey questRenascer_estagio 1
     NotInMap yuno
@@ -311,11 +311,10 @@ automacro questRenascer_primeiroEstagio_bugada {
 automacro questRenascer_pagarTaxa {
     ConfigKey questRenascer_estagio 2
     Zeny = 1285000
-    InMap yuno_in02
     exclusive 1
     QuestInactive 1000
     call {
-        do move 90 166
+        do move yuno_in02 90 166
         ####do talknpc 88 164 c w1 c w1 c w1 r0
         do talk &npc(/Metheus /)
         do talk resp 0

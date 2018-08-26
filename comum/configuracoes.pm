@@ -6,7 +6,7 @@ sub configurarBuild {
     # Para debug
     warning Dumper($configsBuild);
     
-    return \%configsBuild;
+    return $configsBuild;
 }
 
 
@@ -30,7 +30,7 @@ sub extrairMapasDeUp {
         #warning "lvl min: " . $configs->{lvlMin}.' '. "lvl max: " . $configs->{lvlMax}."\n";
         if ($configs->{lvlMin} <= $lvl && $lvl <= $configs->{lvlMax}) {  #checa em qual "grupo" (de lvlMin e lvlMax) seu nivel se encaixa
             my %hash = (lockMap => $configs->{lockMap}, saveMap => $configs->{saveMap});
-               return \%hash;
+            return \%hash;
         }
     }
 }
@@ -46,7 +46,7 @@ sub inicializarParametrosQuestClasseRenascer {
 
 sub lerArquivo {
     my $arquivo = @_;
-    my $path = Settings::getControlFolders()[0];
+    my $path = (Settings::getControlFolders())[0];
     my $conteudo;
     open(my $arquivoStream, '<', "$path/$arquivo") or die "Erro ao ler arquivo $arquivo";
     {

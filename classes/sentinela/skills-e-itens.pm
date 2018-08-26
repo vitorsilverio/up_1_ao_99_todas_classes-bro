@@ -298,7 +298,8 @@ automacro verificarFlechas {
     JobIDNot 0 #Aprendiz
     JobIDNot 4001 #Aprendiz T.
     JobIDNot 4023 #Baby Aprendiz
-    InInventoryID 1750 < 100
+    InInventory "Flecha" < 100
+    InInventory "Flecha" > 0
     ConfigKey buyAuto_1_zeny > 2000, buyAuto_1_zeny > 5000
     call {
         [
@@ -309,9 +310,25 @@ automacro verificarFlechas {
         ]
         call pararDeAtacar
         do autosell
-        if ( $.zeny >= &config(buyAuto_1_zeny) ) {
+        # buyAuto_1_zeny contem valores como "> 5000" ou "> 2000" temos que remover o "> "
+        [
+        log ================================
+        log = tentando descobrir quantos zenys precisamos
+        log ================================
+        ]
+        $zenyNecessario = pegarZenyDoBuyAuto()
+        if ($zenyNecessario = erro) stop
+        
+        [
+        log ====================================
+        log Checando se tenho no minimo $zenyNecessario zenys
+        ]
+        if ( $.zeny >= $zenyNecessario ) {
+            [
+            log = tenho sim
+            log ===================================
+            ]
             do autobuy
-
         } else {
             [
             log ===================================
@@ -320,6 +337,37 @@ automacro verificarFlechas {
             ]
             do eval Misc::offlineMode()
         }
+        do eq &inventory(1750) #Id da flecha
+        call voltarAtacar
+    }
+}
+
+sub pegarZenyDoBuyAuto {
+
+    if ($config{"buyAuto_1_zeny"} =~ /(\d+)/) {
+        return $1;
+    } else {
+        error "Erro encontrado tentando saber quanto zeny preciso ter pra comprar flechas\n".
+        "valor: '" . $config{"buyAuto_1_zeny"} . "' \n";
+        return "erro";
+    }
+}
+
+automacro autoEquiparFlechas {
+    exclusive 1
+    JobIDNot 0 #Aprendiz
+    JobIDNot 4001 #Aprendiz T.
+    JobIDNot 4023 #Baby Aprendiz
+    InInventory "Flecha" >= 100
+    IsNotEquippedID arrow 1750
+    call {
+        [
+        log ===================================
+        log Tenho flechas, mas não equipadas
+        log Equipando!!
+        log ===================================
+        ]
+        do eq &inventory(1750) #Id da flecha
     }
 }
 
